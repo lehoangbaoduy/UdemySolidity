@@ -9,6 +9,7 @@ const { abi, evm } = require('../compile');
 let accounts;
 let inbox;
 
+// beforeEach: execute some general setup code
 beforeEach(async() => {
     // Get a list of all accounts
     accounts = await web3.eth.getAccounts();
@@ -16,12 +17,14 @@ beforeEach(async() => {
     // Use one of those accounts to deploy the contract
     inbox = await new web3.eth.Contract(abi)
         .deploy({
-            data: evm.bytecode.object,
-            arguments: ['Hi there!'],
+            data: evm.bytecode.object, // actual bytecode of the contract
+            arguments: ['Hi there!'],  // initial message of our contract
         })
         .send({ from: accounts[0], gas: '1000000' });
 });
 
+// describe: group together 'it' functions
+// it: will compare the actual value and the expected value (we call assertion)
 describe('Inbox', () => {
     it('deploys a contract', () => {
         // test if we deployed the contract
