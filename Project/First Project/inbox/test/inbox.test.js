@@ -20,7 +20,7 @@ beforeEach(async() => {
             data: evm.bytecode.object, // actual bytecode of the contract
             arguments: ['Hi there!'],  // initial message of our contract
         })
-        .send({ from: accounts[0], gas: '1000000' });
+        .send({ from: accounts[0], gas: '1000000' });  // send(): who pays for this action
 });
 
 // describe: group together 'it' functions
@@ -29,6 +29,7 @@ describe('Inbox', () => {
     it('deploys a contract', () => {
         // test if we deployed the contract
         // by checking if there is an address assigned to the contract
+        // ok function: whatever passed in as parameter, it will return if that exists or not
         assert.ok(inbox.options.address);
     });
 
